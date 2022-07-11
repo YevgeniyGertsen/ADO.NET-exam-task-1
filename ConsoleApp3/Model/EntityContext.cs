@@ -19,5 +19,6 @@ namespace ConsoleApp3.Model
         public virtual DbSet<TableEvaluationSysStatus> TableEvaluationSysStatuses { get; set; }
         public virtual DbSet<newEquipment> newEquipments { get; set; }
         public virtual DbSet<TablesModel> TablesModels { get; set; }
+        public virtual DbSet<news> news { get; set; }
     }     
 }

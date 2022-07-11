@@ -1,6 +1,7 @@
 ﻿using ConsoleApp3.Model;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,8 +10,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace ConsoleApp3
 {
@@ -24,6 +27,9 @@ namespace ConsoleApp3
 
         static void Main(string[] args)
         {
+            DownloadNews();
+
+
             try
             {
                 Console.Write("Введите дату начала: ");
@@ -53,8 +59,8 @@ namespace ConsoleApp3
             using (EntityContext db = new EntityContext())
             {
                 return db.TrackEvaluation
-                    .Where(w=>w.dCreateDate >= dateFrom 
-                           && w.dCreateDate <= dateTo).ToList();               
+                    .Where(w => w.dCreateDate >= dateFrom
+                           && w.dCreateDate <= dateTo).ToList();
             }
         }
 
@@ -75,7 +81,7 @@ namespace ConsoleApp3
                 int k = 3;
 
                 System.Drawing.Color colFromHex = ColorTranslator.FromHtml("#1e6475");
-              
+
                 foreach (TrackEvaluation item in data)
                 {
                     sheet.Cells[k, 1].Value = item.intEvalutionNumber;
@@ -87,7 +93,7 @@ namespace ConsoleApp3
                     }
                     k++;
                 }
-                                
+
                 package.SaveAs(path);
                 SendMail(path);
             }
@@ -125,6 +131,47 @@ namespace ConsoleApp3
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public static void DownloadNews()
+        {
+            while (true)
+            {
+                #region code
+                //1 получить список новостей
+                string content = "";
+                var client = new RestClient("https://www.profinance.ru");
+
+                var request = new RestRequest("forex.xml", Method.Get);
+                request.RequestFormat = DataFormat.Xml;
+
+                var data = client.Execute(request);
+                if (data.IsSuccessful)
+                {
+                    content = data.Content;
+                }
+                else
+                {
+                    Console.WriteLine(data.StatusCode + " (" + data.StatusDescription + ")");
+                }
+
+                //2 взять нужное
+                XElement doc = XElement.Parse(content);
+                var rss = doc.Element("channel").Elements("item");
+                foreach (XElement item in rss)
+                {
+                    news news = new news();
+                    news.title = item.Element("title").Value;
+                    db.news.Add(news);
+                }
+
+                //3 записать в БД
+                db.SaveChanges();
+                #endregion
+
+                Thread.Sleep(2000);
+            }
+           
         }
     }
 }
