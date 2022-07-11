@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="75095080c3d04cd8bd70f968475d7c34" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="practiceModel.Area" Width="1.5" PointX="6.375" PointY="5.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="practiceModel.newEquipment" Width="1.5" PointX="6" PointY="7" IsExpanded="false" />
+        <EntityTypeShape EntityType="practiceModel.TableEquipmentHistory" Width="2.375" PointX="7.625" PointY="8" IsExpanded="false" />
+        <EntityTypeShape EntityType="practiceModel.TablesManufacturer" Width="1.5" PointX="3.625" PointY="6" IsExpanded="false" />
+        <EntityTypeShape EntityType="practiceModel.TablesModel" Width="1.5" PointX="3.375" PointY="7.625" IsExpanded="false" />
+        <AssociationConnector Association="practiceModel.FK_newEquipment_TablesManufacturer" ManuallyRouted="false" />
+        <AssociationConnector Association="practiceModel.FK_newEquipment_TablesModel" ManuallyRouted="false" />
+        <AssociationConnector Association="practiceModel.FK_TableEquipmentHistory_newEquipment" ManuallyRouted="false" />
+        <AssociationConnector Association="practiceModel.FK_newTablesModel_newTablesModel" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
