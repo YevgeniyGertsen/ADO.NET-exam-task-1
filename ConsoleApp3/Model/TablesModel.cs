@@ -14,6 +14,6 @@ namespace ConsoleApp3.Model
         [Key]
         public int intModelID { get; set; }
         public string strName { get; set; }
-        public virtual ICollection<newEquipment> newEquipment { get; set; }
+       // public virtual ICollection<newEquipment> newEquipment { get; set; }
     }
 }

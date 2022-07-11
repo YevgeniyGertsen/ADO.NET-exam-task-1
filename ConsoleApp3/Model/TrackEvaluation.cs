@@ -14,17 +14,18 @@ namespace ConsoleApp3.Model
         [Key]
         public int intEvalutionId { get; set; }
 
-        public int intEvalutionNumber { get; set; }
-        public DateTime dCreateDate { get; set; }
+        public int? intEvalutionNumber { get; set; }
+        public DateTime? dCreateDate { get; set; }
         public string strSalesOrderNumber { get; set; }
-        public DateTime dConfirmDate { get; set; }
-        public DateTime dDateOfSale { get; set; }
-        public DateTime dEstimatedDateArrival { get; set; }
-        public DateTime dArrivalDate { get; set; }
-        public bool floatETTR { get; set; }
-        public bool floatELTR { get; set; }
+        public DateTime? dConfirmDate { get; set; }
+        public DateTime? dDateOfSale { get; set; }
+        public DateTime? dEstimatedDateArrival { get; set; }
+        public DateTime? dArrivalDate { get; set; }
+        public double? floatETTR { get; set; }
+        public double? floatELTR { get; set; }
+        public int? intEquipmentID { get; set; }
 
         //public virtual TableEvaluationSysStatus TableEvaluationSysStatus { get; set; }
-       // public virtual newEquipment newEquipment { get; set; }
+        public virtual newEquipment newEquipment { get; set; }
     }
 }

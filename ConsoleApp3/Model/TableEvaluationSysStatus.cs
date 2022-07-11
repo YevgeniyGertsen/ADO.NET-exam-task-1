@@ -15,6 +15,6 @@ namespace ConsoleApp3.Model
         public int intEvaluationSysStatusId { get; set; }
         public string strStatysName { get; set; }
 
-        public virtual  ICollection<TrackEvaluation> TrackEvaluation { get; set; }
+       // public virtual  ICollection<TrackEvaluation> TrackEvaluation { get; set; }
     }
 }

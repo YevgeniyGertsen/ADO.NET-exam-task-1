@@ -14,7 +14,7 @@ namespace ConsoleApp3.Model
         [Key]
         public int intEquipmentID { get; set; }
         public int intModelID { get; set; }
-        public virtual TablesModel TablesModel { get; set; }
+       // public virtual TablesModel TablesModel { get; set; }
         public virtual ICollection<TrackEvaluation> TrackEvaluation { get; set; }
     }
 }
