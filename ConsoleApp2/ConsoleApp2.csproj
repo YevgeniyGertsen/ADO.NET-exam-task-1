@@ -70,6 +70,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GetEquipmentByGarageRoom_Result.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="newEquipment.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>

@@ -12,6 +12,8 @@ namespace ConsoleApp2
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class practiceEntities : DbContext
     {
@@ -30,5 +32,15 @@ namespace ConsoleApp2
         public virtual DbSet<TableEquipmentHistory> TableEquipmentHistory { get; set; }
         public virtual DbSet<TablesManufacturer> TablesManufacturer { get; set; }
         public virtual DbSet<TablesModel> TablesModel { get; set; }
+    
+        [DbFunction("practiceEntities", "GetEquipmentByGarageRoom")]
+        public virtual IQueryable<GetEquipmentByGarageRoom_Result> GetEquipmentByGarageRoom(string intGarageRoom)
+        {
+            var intGarageRoomParameter = intGarageRoom != null ?
+                new ObjectParameter("intGarageRoom", intGarageRoom) :
+                new ObjectParameter("intGarageRoom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetEquipmentByGarageRoom_Result>("[practiceEntities].[GetEquipmentByGarageRoom](@intGarageRoom)", intGarageRoomParameter);
+        }
     }
 }

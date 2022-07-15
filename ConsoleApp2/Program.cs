@@ -15,6 +15,8 @@ namespace ConsoleApp2
 
             db.Database.Log = Console.Write;
 
+           var data55 = db.GetEquipmentByGarageRoom("108").ToList();
+
             //загрузка всех машин и связанных с ними моделей
             //жадная загружка
             List<newEquipment> equipments =

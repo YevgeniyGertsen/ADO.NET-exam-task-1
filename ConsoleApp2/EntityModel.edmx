@@ -146,6 +146,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetEquipmentByGarageRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="intGarageRoom" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="intEquipmentID" Type="int" />
+                <Property Name="intManufacturerID" Type="int" />
+                <Property Name="intModelID" Type="int" />
+                <Property Name="strManufYear" Type="int" />
+                <Property Name="strSerialNo" Type="nvarchar" MaxLength="20" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <EntityContainer Name="Хранилище practiceModelContainer">
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="newEquipment" EntityType="Self.newEquipment" Schema="dbo" store:Type="Tables" />
@@ -344,7 +358,17 @@
             <End Role="TablesManufacturer" EntitySet="TablesManufacturer" />
             <End Role="TablesModel" EntitySet="TablesModel" />
           </AssociationSet>
+          <FunctionImport Name="GetEquipmentByGarageRoom" IsComposable="true" ReturnType="Collection(practiceModel.GetEquipmentByGarageRoom_Result)">
+            <Parameter Name="intGarageRoom" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="GetEquipmentByGarageRoom_Result">
+          <Property Type="Int32" Name="intEquipmentID" Nullable="true" />
+          <Property Type="Int32" Name="intManufacturerID" Nullable="true" />
+          <Property Type="Int32" Name="intModelID" Nullable="true" />
+          <Property Type="Int32" Name="strManufYear" Nullable="true" />
+          <Property Type="String" Name="strSerialNo" Nullable="true" MaxLength="20" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -449,6 +473,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetEquipmentByGarageRoom" FunctionName="Хранилище practiceModel.GetEquipmentByGarageRoom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="practiceModel.GetEquipmentByGarageRoom_Result">
+                <ScalarProperty Name="intEquipmentID" ColumnName="intEquipmentID" />
+                <ScalarProperty Name="intManufacturerID" ColumnName="intManufacturerID" />
+                <ScalarProperty Name="intModelID" ColumnName="intModelID" />
+                <ScalarProperty Name="strManufYear" ColumnName="strManufYear" />
+                <ScalarProperty Name="strSerialNo" ColumnName="strSerialNo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
